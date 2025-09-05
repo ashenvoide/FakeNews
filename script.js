@@ -11,7 +11,6 @@ async function verificarNoticia() {
     "ganhe dinheiro fácil", "fique rico rápido", "100% garantido", "oferta imperdível",
     "ninguém fala sobre isso", "verdade oculta", "segredo revelado", "conspiração",
     "não tome vacina", "nasa mente", "trabalhe 1 hora por dia", "robôs vão dominar",
-    
     "cura imediata", "doença inventada", "remédio escondido", "vacina inútil",
     "nova ordem mundial", "reptilianos", "fake comprovada", "milagre secreto",
     "clique aqui", "link suspeito", "hackeado", "alerta urgente", "chocante",
@@ -20,41 +19,26 @@ async function verificarNoticia() {
     "fim da humanidade", "alienígenas controlam", "cura com ervas secretas",
     "experimento proibido", "internet esconde", "cura natural proibida",
     "cientistas foram silenciados", "descoberta oculta", "mídia mente"
-    // saúde / curas / remédios
-  "cura", "cura milagrosa", "remédio secreto", "remédio caseiro",
-  "cura garantida","cura imediata","cura em 24 horas","cura em 7 dias",
-  "tratamento secreto","tratamento caseiro","cura natural",
-  "vacina", "vacina perigosa", "vacina mata", "vacina causa autismo",
-  "vacina causa", "não tome vacina", "chip na vacina",
-
-  // conspirações / governo / mídia
-  "governo esconde","segredo revelado","não querem que você saiba",
-  "mídia mente","mídia comprada","plano secreto","nova ordem mundial",
-  "controle da mente","eles não querem","escondem de você",
-
-  // política / eleições
-  "urnas fraudadas","eleição roubada","fraude eleitoral","golpe confirmado",
-  "voto manipulado","fraude confirmada","manipulação de votos",
-
-  // dinheiro / golpes / ganhos fáceis
-  "ganhe dinheiro fácil","fique rico rápido","método infalível","dinheiro grátis",
-  "trabalhe 1 hora por dia","renda extra fácil","oferta imperdível","enriquecer rápido",
-
-  // ciência absurda / paranormal / apocalipse
-  "terra plana","nunca fomos à lua","alienígenas confirmados","fim do mundo",
-  "profecia","profecia revelada","sinais do fim","apocalipse confirmado",
-
-  // tecnologia / 5g / chips
-  "chip 5g","controle 5g","chip implantado","chip na vacina","robôs vão dominar",
-
-  // sensacionalismo / ação imediata
-  "urgente","compartilhe já","antes que apaguem","espalhe agora","exclusivo",
-  "chocante","inacreditável","revelação chocante","segredo do governo",
-
-  // palavras gerais para ampliar
-  "fake","boato","mentira","farsa","enganoso","enganar","fraude","censurado"
-];
-
+    "cura", "cura milagrosa", "remédio secreto", "remédio caseiro",
+    "cura garantida","cura imediata","cura em 24 horas","cura em 7 dias",
+    "tratamento secreto","tratamento caseiro","cura natural",
+    "vacina", "vacina perigosa", "vacina mata", "vacina causa autismo",
+    "vacina causa", "não tome vacina", "chip na vacina",
+    "governo esconde","segredo revelado","não querem que você saiba",
+    "mídia mente","mídia comprada","plano secreto","nova ordem mundial",
+    "controle da mente","eles não querem","escondem de você",
+    "urnas fraudadas","eleição roubada","fraude eleitoral","golpe confirmado",
+    "voto manipulado","fraude confirmada","manipulação de votos",
+    "ganhe dinheiro fácil","fique rico rápido","método infalível","dinheiro grátis",
+    "trabalhe 1 hora por dia","renda extra fácil","oferta imperdível","enriquecer rápido",
+    "terra plana","nunca fomos à lua","alienígenas confirmados","fim do mundo",
+    "profecia","profecia revelada","sinais do fim","apocalipse confirmado",
+    "chip 5g","controle 5g","chip implantado","chip na vacina","robôs vão dominar",
+    "urgente","compartilhe já","antes que apaguem","espalhe agora","exclusivo",
+    "chocante","inacreditável","revelação chocante","segredo do governo",
+    "fake","boato","mentira","farsa","enganoso","enganar","fraude","censurado"
+]; 
+    
 // 2) Sufixos e prefixos para gerar combinações variadas
 const prefixes = [
   "", "URGENTE: ", "ATENÇÃO: ", "EXCLUSIVO: ", "ALERTA: ",
