@@ -4,12 +4,25 @@ async function verificarNoticia() {
 
     // Palavras-chave padrão
     const palavrasSuspeitas = [
-        "cura milagrosa", "remédio secreto", "vacina perigosa", "vacina mata", "vacina causa autismo",
-        "chip 5g", "chip na vacina", "terra plana", "fim do mundo", "governo esconde",
-        "cientistas escondem", "mídia comprada", "controle da mente", "nova doença inventada",
-        "ganhe dinheiro fácil", "fique rico rápido", "100% garantido", "oferta imperdível",
-        "ninguém fala sobre isso", "verdade oculta", "segredo revelado", "conspiração",
-        "não tome vacina", "nasa mente", "trabalhe 1 hora por dia", "robôs vão dominar"
+       {
+    "cura milagrosa", "remédio secreto", "vacina perigosa", "vacina mata", "vacina causa autismo",
+    "chip 5g", "chip na vacina", "terra plana", "fim do mundo", "governo esconde",
+    "cientistas escondem", "mídia comprada", "controle da mente", "nova doença inventada",
+    "ganhe dinheiro fácil", "fique rico rápido", "100% garantido", "oferta imperdível",
+    "ninguém fala sobre isso", "verdade oculta", "segredo revelado", "conspiração",
+    "não tome vacina", "nasa mente", "trabalhe 1 hora por dia", "robôs vão dominar",
+    
+    "cura imediata", "doença inventada", "remédio escondido", "vacina inútil",
+    "nova ordem mundial", "reptilianos", "fake comprovada", "milagre secreto",
+    "clique aqui", "link suspeito", "hackeado", "alerta urgente", "chocante",
+    "cientistas confirmam", "nunca conte", "verdade escondida", "isso muda tudo",
+    "ganhe prêmio fácil", "não querem que você saiba", "segredo do governo",
+    "fim da humanidade", "alienígenas controlam", "cura com ervas secretas",
+    "experimento proibido", "internet esconde", "cura natural proibida",
+    "cientistas foram silenciados", "descoberta oculta", "mídia mente"
+  ]
+}
+
     ];
 
     let encontrou = false;
