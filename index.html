@@ -1,27 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verifica - Detector de Fake News</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Notícias</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>📰 Verifica</h1>
-    <p>Seu detector de Fake News online</p>
-  </header>
-
-  <main>
-    <textarea id="textoNoticia" placeholder="Cole aqui a notícia que deseja verificar..."></textarea>
-    <button onclick="verificarNoticia()">Verificar</button>
-    <div id="resultado"></div>
-  </main>
-
-  <footer>
-    <p>⚡ Projeto acadêmico de combate à desinformação - Verifica 2025</p>
-  </footer>
-
-  <script src="script.js"></script>
+    <div class="container">
+        <h1>Verificador de Notícias</h1>
+        <p>Cole o texto, URL ou carregue uma imagem para verificar a veracidade.</p>
+        <textarea id="textoNoticia" placeholder="Cole o texto da notícia aqui..."></textarea>
+        <button onclick="verificarNoticia()">Verificar</button>
+        <div id="resultado" class="alerta-neutro">Aguardando verificação...</div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

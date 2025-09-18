@@ -1,156 +1,218 @@
+// Este é um exemplo simplificado de como a lógica de verificação funcionaria no navegador.
+// Para um projeto real, seria necessário um back-end e técnicas mais sofisticadas.
+
+const palavrasSuspeitas = [
+    "cura milagrosa", "remédio secreto", "teoria da conspiração", "revelado",
+    "exclusivo", "urgente", "chocante", "inacreditável", "proibido", "censurado",
+    "fim do mundo", "sinais", "verdade oculta", "plano secreto", "controle",
+    "elite", "globalista", "nova ordem mundial", "satânico", "illuminati",
+    "agenda", "vacina perigosa", "efeitos colaterais graves", "contém veneno",
+    "causa autismo", "microchip", "5G perigoso", "radiação prejudicial",
+    "terra plana", "chemtrails", "adrenocromo", "cloroquina cura", "ivermectina cura",
+    "soro da verdade", "contas falsas", "robôs", "bots", "exército virtual",
+    "fake news", "notícia falsa", "desmascarado", "fraude", "golpe", "mentira",
+    "engano", "farsa", "manipulação", "distorção", "sensacionalista", "escândalo",
+    "sequestro", "abdução", "alienígena", "OVNI", "fantasma", "espírito",
+    "sobrenatural", "bruxaria", "feitiço", "maldição", "milagre", "profecia",
+    "apocalipse", "anticristo", "demônio", "anjo caído", "entidade", "portal",
+    "dimensão", "viagem no tempo", "teletransporte", "invisibilidade", "levitação",
+    "telecinese", "clarividência", "telepatia", "poderes psíquicos", "aura",
+    "energia", "vibração", "chakra", "karma", "reencarnação", "astrologia",
+    "tarot", "numerologia", "quiromancia", "magia", "ocultismo", "esoterismo",
+    "misticismo", "ayahuasca", "chá de cogumelo", "dimetiltriptamina", "DMT",
+    "psicodélico", "alucinógeno", "cannabis cura", "óleo de CBD cura", "legalização",
+    "descriminalização", "proibição", "guerra às drogas", "narcotráfico", "cartel",
+    "facção", "tráfico humano", "exploração sexual", "pedofilia", "pornografia infantil",
+    "abuso", "assédio", "violência sexual", "estupro", "incesto", "seita", "culto",
+    "fanatismo religioso", "extremismo", "terrorismo", "radicalismo", "jihad",
+    "fundamentalismo", "nazismo", "fascismo", "racismo", "xenofobia", "antissemitismo",
+    "islamofobia", "homofobia", "transfobia", "misoginia", "machismo", "supremacia branca",
+    "nacionalismo extremista", "separatismo", "genocídio", "limpeza étnica", "massacre",
+    "tortura", "execução", "pena de morte", "suicídio", "eutanásia", "aborto",
+    "clonagem", "edição genética", "OGM", "transgênico", "veneno", "agrotóxico",
+    "poluição", "aquecimento global", "mudanças climáticas", "negação do clima",
+    "terra oca", "civilização perdida", "ATLANTIDA", "EL DORADO", "SACRED GEOMETRY",
+    "free energy", "perpetual motion", "anti-gravity", "area 51", "roswell",
+    "alien autopsy", "men in black", "crop circles", "bigfoot", "yeti", "chupacabra",
+    "sereia", "lobisomem", "vampiro", "zumbi", "fantasma", "maldição", "possessão",
+    "exorcismo", "demônio", "anjo caído", "anticristo", "apocalipse", "profecia",
+    "fim do mundo", "arrebatamento", "tribulação", "anticristo", "sinais",
+    "cura gay", "terapia de conversão", "ideologia de gênero", "marxismo cultural",
+    "globalismo", "foro de são paulo", "comunismo", "socialismo", "capitalismo",
+    "liberalismo", "conservadorismo", "anarquismo", "fascismo", "nazismo",
+    "ditadura", "democracia", "monarquia", "república", "oligarquia", "teocracia",
+    "plutocracia", "tecnocracia", "sinarquia", "criptocracia", "kakistocracia",
+    "kleptocracia", "ochlocracia", "partidocracia", "burocracia", "meritocracia",
+    "aristocracia", "demagogia", "propaganda", "doutrinação", "lavagem cerebral",
+    "manipulação midiática", "controle da informação", "notícias falsas", "deepfake",
+    "inteligência artificial perigosa", "robôs assassinos", "singularidade",
+    "matrix", "simulação", "vida após a morte", "experiência de quase morte", "EQM",
+    "projecção astral", "viagem astral", "corpo astral", "espírito", "alma",
+    "reencarnação", "karma", "dharma", "nirvana", "samsara", "moksha", "iluminação",
+    "despertar", "consciência", "expansão da consciência", "terceiro olho", "pineal",
+    "meditação", "yoga", "reiki", "acupuntura", "homeopatia", "cristais", "tarot",
+    "astrologia", "numerologia", "quiromancia", "leitura de aura", "passe",
+    "cromoterapia", "musicoterapia", "aromaterapia", "fitoterapia", "cura quântica",
+    "medicina alternativa", "tratamento natural", "remédio caseiro", "chá milagroso",
+    "dieta detox", "jejum intermitente", "veganismo cura", "crudivorismo cura",
+    "frutarianismo cura", "respiracionismo", "imunidade de rebanho", "distanciamento social",
+    "máscara ineficaz", "lockdown desnecessário", "economia em colapso", "crise financeira",
+    "hiperinflação", "bolha imobiliária", "mercado de ações manipulado", "ouro digital",
+    "criptomoeda é fraude", "blockchain é seguro", "hackers invadem", "dados vazados",
+    "vigilância em massa", "controle total", "big brother", "estado policial",
+    "perda de liberdade", "direitos humanos violados", "censura", "perseguição",
+    "guerra civil", "insurreição", "revolução", "protesto violento", "quebra-quebra",
+    "saque", "anarquia", "caos", "destruição", "catástrofe natural", "terremoto",
+    "tsunami", "vulção", "furacão", "tornado", "enchente", "seca", "pandemia",
+    "epidemia", "vírus letal", "doença misteriosa", "cura encontrada", "vacina obrigatória",
+    "passaporte sanitário", "controle populacional", "eugenia", "esterilização forçada",
+    "experimentos secretos", "cobaias humanas", "clonagem humana", "ciborgues",
+    "inteligência artificial superior", "fim da humanidade", "era das máquinas",
+    "conflito intergaláctico", "invasão alienígena", "arma secreta", "raio da morte",
+    "controle mental", "hipnose", "subliminar", "propaganda subliminar", "guerra psicológica",
+    "operação de bandeira falsa", "false flag operation", "agente infiltrado", "espião",
+    "sabotagem", "terrorismo de estado", "guerra híbrida", "ataque cibernético", "guerra fria",
+    "nova guerra fria", "conflito nuclear", "ameaça existencial", "crise humanitária",
+    "fome", "pobreza extrema", "desigualdade social", "injustiça", "corrupção", "impunidade",
+    "sistema falido", "reforma urgente", "mudança radical", "resistência", "revolta",
+    "libertação", "despertar da consciência", "nova era", "transição planetária",
+    "ascensão", "quinta dimensão", "seres de luz", "mestres ascensos", "pleiadianos",
+    "sirianos", "arcturianos", "comandos estelares", "frota estelar", "confederação galáctica",
+    "anjos", "arcanjos", "demônios", "entidades", "espíritos", "obsessores", "mentores espirituais",
+    "guias espirituais", "protetores", "oração", "meditação", "mantra", "ritual", "magia",
+    "feitiço", "amarração amorosa", "pacto", "sacrifício", "maldição", "quebranto", "mau-olhado",
+    "simpatia", "banho de descarrego", "limpeza energética", "alinhamento de chakras",
+    "cura prânica", "toque terapêutico", "massagem tântrica", "expansão da sexualidade",
+    "liberação sexual", "poliamor", "relacionamento aberto", "swinger", "BDSM", "fetiche",
+    "transgeneridade", "não-binaridade", "gênero fluido", "orientação sexual", "identidade de gênero",
+    "direitos LGBTQIA+", "movimento feminista", "luta antirracista", "questão indígena",
+    "causa animal", "proteção ambiental", "desenvolvimento sustentável", "economia verde",
+    "criptomoedas", "bitcoin", "ethereum", "finanças descentralizadas", "DeFi", "NFTs",
+    "metaverso", "realidade virtual", "realidade aumentada", "inteligência artificial",
+    "machine learning", "big data", "internet das coisas", "IOT", "cidades inteligentes",
+    "tecnologia 5G", "energia limpa", "energia solar", "energia eólica", "energia nuclear",
+    "fusão nuclear", "viagem espacial", "colonização de marte", "busca por vida extraterrestre",
+    "SETI", "espaço profundo", "buracos negros", "buracos de minhoca", "viagem no tempo",
+    "universos paralelos", "multiverso", "teoria das cordas", "física quântica",
+    "consciência quântica", "campo unificado", "energia do ponto zero", "vácuo quântico",
+    "anti-matéria", "matéria escura", "energia escura", "expansão do universo", "big bang",
+    "big crunch", "big rip", "ciclo cósmico", "simulação", "vida é uma simulação",
+    "criacionismo", "design inteligente", "evolucionismo", "darwinismo social",
+    "eugenia", "melhoramento genético", "edição de genes", "CRISPR", "bebês de proveta",
+    "fertilização in vitro", "barriga de aluguel", "transplante de órgãos",
+    "órgãos artificiais", "próteses biônicas", "interface cérebro-computador",
+    "exosqueleto", "nanotecnologia", "medicina regenerativa", "células estaminais",
+    "terapia genética", "imortalidade", "extensão da vida", "criogenia", "consciência digital",
+    "upload da mente", "singularidade tecnológica", "inteligência artificial super-humana",
+    "transumanismo", "pós-humanismo", "chip cerebral", "implante cibernético",
+    "realidade sintética", "mundo virtual", "jogos online perigosos", "vício em tecnologia",
+    "isolamento social", "depressão", "ansiedade", "saúde mental", "terapia", "psiquiatria",
+    "psicologia", "neurociência", "funcionamento do cérebro", "memória", "aprendizagem",
+    "emoções", "consciência", "subconsciente", "inconsciente coletivo", "arquétipos",
+    "sincronicidade", "intuição", "criatividade", "medo", "raiva", "tristeza", "alegria",
+    "amor", "ódio", "ciúme", "inveja", "culpa", "vergonha", "arrependimento", "esperança",
+    "fé", "perdão", "compaixão", "empatia", "generosidade", "gratidão", "felicidade",
+    "propósito", "sentido da vida", "busca espiritual", "religião", "filosofia", "ciência",
+    "arte", "música", "literatura", "poesia", "pintura", "escultura", "teatro", "cinema",
+    "dança", "fotografia", "arquitetura", "gastronomia", "viagem", "cultura", "história",
+    "geografia", "matemática", "física", "química", "biologia", "astronomia", "geologia",
+    "meteorologia", "oceanografia", "antropologia", "sociologia", "economia", "política",
+    "direito", "educação", "saúde", "bem-estar", "esporte", "lazer", "entretenimento",
+    "notícias", "informação", "comunicação", "mídia", "internet", "redes sociais",
+    "tecnologia", "inovação", "futuro", "passado", "presente", "tempo", "espaço", "universo",
+    "terra", "planeta", "sol", "lua", "estrelas", "galáxias", "cosmo", "átomo", "molécula",
+    "célula", "DNA", "gene", "vida", "morte", "nascimento", "infância", "adolescência",
+    "adulto", "idoso", "família", "amigos", "sociedade", "humanidade", "mundo", "país",
+    "cidade", "natureza", "animal", "planta", "mineral", "elemento", "substância",
+    "energia", "força", "movimento", "velocidade", "aceleração", "gravidade", "luz",
+    "som", "calor", "frio", "pressão", "volume", "massa", "peso", "distância", "tempo",
+    "temperatura", "clima", "estação", "dia", "noite", "manhã", "tarde", "noite", "hora",
+    "minuto", "segundo", "ano", "mês", "semana", "dia", "data", "calendário", "relógio",
+    "mapa", "bússola", "gps", "telefone", "computador", "internet", "software", "hardware",
+    "aplicativo", "programa", "código", "linguagem", "algoritmo", "rede", "servidor",
+    "cliente", "site", "blog", "fórum", "chat", "email", "mensagem", "chamada", "vídeo",
+    "áudio", "imagem", "texto", "arquivo", "pasta", "disco", "memória", "processador",
+    "monitor", "teclado", "mouse", "impressora", "scanner", "câmera", "microfone",
+    "alto-falante", "fone de ouvido", "bateria", "carregador", "cabo", "adaptador",
+    "router", "modem", "switch", "hub", "cabo de rede", "wi-fi", "bluetooth", "USB",
+    "HDMI", "VGA", "ethernet", "fibra óptica", "satélite", "rádio", "televisão",
+    "jornal", "revista", "livro", "dicionário", "enciclopédia", "glossário", "manual",
+    "guia", "instrução", "tutorial", "exemplo", "demonstração", "simulação", "modelo",
+    "protótipo", "projeto", "plano", "ideia", "conceito", "teoria", "hipótese",
+    "pesquisa", "estudo", "análise", "relatório", "artigo", "tese", "dissertação",
+    "monografia", "livro didático", "material de referência", "documentação",
+    "especificação", "padrão", "norma", "protocolo", "regra", "lei", "código",
+    "regulamento", "diretriz", "recomendação", "orientação", "conselho", "sugestão",
+    "dica", "truque", "segredo", "mistério", "enigma", "quebra-cabeça", "jogo",
+    "brinquedo", "diversão", "entretenimento", "passatempo", "hobby", "arte",
+    "artesanato", "culinária", "jardinagem", "colecionismo", "esporte", "atividade física",
+    "exercício", "treinamento", "dieta", "alimentação saudável", "nutrição", "receita",
+    "ingrediente", "tempero", "sabor", "aroma", "textura", "cor", "som", "luz",
+    "temperatura", "clima", "estação", "paisagem", "ambiente", "ecossistema",
+    "biodiversidade", "natureza", "animal", "planta", "fungo", "micróbio", "vírus",
+    "bactéria", "célula", "átomo", "partícula", "onda", "campo", "energia", "força",
+    "matéria", "espaço", "tempo", "universo", "realidade", "ilusão", "sonho",
+    "imaginação", "fantasia", "criatividade", "inspiração", "ideia", "pensamento",
+    "razão", "lógica", "intuição", "sentimento", "emoção", "paixão", "desejo",
+    "necessidade", "motivação", "objetivo", "meta", "plano", "ação", "resultado",
+    "consequência", "causa", "efeito", "problema", "solução", "dificuldade",
+    "oportunidade", "desafio", "sucesso", "fracasso", "vitória", "derrota",
+    "conflito", "cooperação", "competição", "colaboração", "acordo", "desacordo",
+    "negociação", "diplomacia", "guerra", "paz", "justiça", "injustiça", "igualdade",
+    "desigualdade", "liberdade", "opressão", "direitos", "deveres", "responsabilidade",
+    "ética", "moral", "valor", "princípio", "crença", "religião", "espiritualidade",
+    "fé", "esperança", "amor", "medo", "coragem", "covardia", "generosidade",
+    "egoísmo", "honestidade", "mentira", "verdade", "confiança", "desconfiança",
+    "lealdade", "traição", "amizade", "inimizade", "família", "comunidade", "sociedade",
+    "cultura", "tradição", "costume", "hábito", "rotina", "mudança", "transformação",
+    "evolução", "revolução", "progresso", "retrocesso", "avanço", "estagnação",
+    "desenvolvimento", "crescimento", "declínio", "auge", "fim", "começo", "início",
+    "meio", "fim", "ciclo", "processo", "sistema", "estrutura", "organização",
+    "instituição", "governo", "estado", "nação", "país", "cidade", "aldeia", "casa",
+    "família", "indivíduo", "pessoa", "ser humano", "vida", "morte", "nascimento"
+];
+
 async function verificarNoticia() {
-    const texto = document.getElementById("textoNoticia").value.toLowerCase();
+    const texto = document.getElementById("textoNoticia").value;
     const resultado = document.getElementById("resultado");
 
-    // Palavras-chave padrão
-    const palavrasSuspeitas = [
-       
-    "cura milagrosa", "remédio secreto", "vacina perigosa", "vacina mata", "vacina causa autismo",
-    "chip 5g", "chip na vacina", "terra plana", "fim do mundo", "governo esconde",
-    "cientistas escondem", "mídia comprada", "controle da mente", "nova doença inventada",
-    "ganhe dinheiro fácil", "fique rico rápido", "100% garantido", "oferta imperdível",
-    "ninguém fala sobre isso", "verdade oculta", "segredo revelado", "conspiração",
-    "não tome vacina", "nasa mente", "trabalhe 1 hora por dia", "robôs vão dominar",
-    "cura imediata", "doença inventada", "remédio escondido", "vacina inútil",
-    "nova ordem mundial", "reptilianos", "fake comprovada", "milagre secreto",
-    "clique aqui", "link suspeito", "hackeado", "alerta urgente", "chocante",
-    "cientistas confirmam", "nunca conte", "verdade escondida", "isso muda tudo",
-    "ganhe prêmio fácil", "não querem que você saiba", "segredo do governo",
-    "fim da humanidade", "alienígenas controlam", "cura com ervas secretas",
-    "experimento proibido", "internet esconde", "cura natural proibida",
-    "cientistas foram silenciados", "descoberta oculta", "mídia mente",
-    "cura", "cura milagrosa", "remédio secreto", "remédio caseiro",
-    "cura garantida","cura imediata","cura em 24 horas","cura em 7 dias",
-    "tratamento secreto","tratamento caseiro","cura natural",
-    "vacina", "vacina perigosa", "vacina mata", "vacina causa autismo",
-    "vacina causa", "não tome vacina", "chip na vacina",
-    "governo esconde","segredo revelado","não querem que você saiba",
-    "mídia mente","mídia comprada","plano secreto","nova ordem mundial",
-    "controle da mente","eles não querem","escondem de você",
-    "urnas fraudadas","eleição roubada","fraude eleitoral","golpe confirmado",
-    "voto manipulado","fraude confirmada","manipulação de votos",
-    "ganhe dinheiro fácil","fique rico rápido","método infalível","dinheiro grátis",
-    "trabalhe 1 hora por dia","renda extra fácil","oferta imperdível","enriquecer rápido",
-    "terra plana","nunca fomos à lua","alienígenas confirmados","fim do mundo",
-    "profecia","profecia revelada","sinais do fim","apocalipse confirmado",
-    "chip 5g","controle 5g","chip implantado","chip na vacina","robôs vão dominar",
-    "urgente","compartilhe já","antes que apaguem","espalhe agora","exclusivo",
-    "chocante","inacreditável","revelação chocante","segredo do governo",
-    "fake","boato","mentira","farsa","enganoso","enganar","fraude","censurado"
-]; 
-    
-// 2) Sufixos e prefixos para gerar combinações variadas
-const prefixes = [
-  "", "URGENTE: ", "ATENÇÃO: ", "EXCLUSIVO: ", "ALERTA: ",
-  "NÃO MANDE PARA NINGUÉM: ", "COMPARTILHE: ", "FORMA RÁPIDA: "
-];
-
-const infixes = [
-  "", " confirmado", " comprovado", " denunciado", " revelado",
-  " escondido", " secreto", " proibido", " proibida", " oculto"
-];
-
-const suffixes = [
-  "", " agora", " já", " antes que apaguem", " sem censura", " por favor compartilhe",
-  " vídeo", " imagem", " estudo", " pesquisa", " documento", " arquivo"
-];
-
-// 3) Lista inicial manual (mantemos alguns termos importantes explícitos)
-const explicit = [
-  // termos mais usados em fake news - explícitos
-  "compartilhe antes que apaguem", "não querem que você saiba", "segredo do governo",
-  "cura do câncer encontrada", "cura do HIV encontrada", "milagre comprovado",
-  "cura milagrosa da diabetes", "cura natural para câncer", "vacina causa autismo",
-  "vacina mata crianças", "vacina foi retirada", "experimento proibido",
-  "laboratório secreto", "engenharia social", "manipulação da mídia",
-  "teoria da conspiração", "mídia oculta", "empresas escondem", "indústria esconde"
-];
-
-// 4) Geração automática: combina bases × prefixes × infixes × suffixes
-// Usamos um Set para evitar duplicatas e limitar a quantidade (por segurança)
-// Iremos gerar até pelo menos 1200 entradas (ou mais, conforme combinações)
-const suspeitasSet = new Set();
-
-// adiciona explicitamente
-explicit.forEach(s => suspeitasSet.add(s.toLowerCase()));
-
-// adiciona as bases simples
-bases.forEach(b => suspeitasSet.add(b.toLowerCase()));
-
-// combinações
-for (let pre of prefixes) {
-  for (let b of bases) {
-    for (let inf of infixes) {
-      for (let suf of suffixes) {
-        // constrói frase
-        let frase = (pre + b + inf + suf).trim();
-        // normaliza espaços
-        frase = frase.replace(/\s+/g, ' ').trim().toLowerCase();
-        if (frase.length > 0) suspeitasSet.add(frase);
-        if (suspeitasSet.size >= 1800) break;
-      }
-      if (suspeitasSet.size >= 1800) break;
+    if (texto.trim() === '') {
+        resultado.innerHTML = "Por favor, insira um texto para verificar.";
+        resultado.className = "alerta-neutro";
+        return;
     }
-    if (suspeitasSet.size >= 1800) break;
-  }
-  if (suspeitasSet.size >= 1800) break;
-}
 
-// 5) Adiciona variações comuns (pluralização, com e sem acento, com hífen)
-const extras = [
-  "vacinas perigosas","vacinas mata","vacina perigosa", "cura milagrosa confirmada",
-  "cura milagrosa comprovada", "cura caseira incrível", "remédio natural milagroso",
-  "cura rápida", "cura instantânea", "cura em 3 dias", "cura em 5 dias",
-  "cura em 10 dias", "remédio secreto da família", "segredo revelado pelo médico"
+    try {
+        resultado.innerHTML = "Analisando o texto em busca de padrões suspeitos...";
+        resultado.className = "alerta-neutro";
 
+        let suspeitoEncontrado = false;
+        const textoMinusculo = texto.toLowerCase();
+        let fonteSuspeita = "";
 
-    ];
-
-    let encontrou = false;
-    
-    // Verificação automática de palavras-chave
-    for (let palavra of palavrasSuspeitas) {
-        if (texto.includes(palavra)) {
-            encontrou = true;
-            break;
+        // Análise de palavras-chave no navegador (simplificado)
+        for (const palavra of palavrasSuspeitas) {
+            if (textoMinusculo.includes(palavra)) {
+                suspeitoEncontrado = true;
+                fonteSuspeita = "Palavras-chave suspeitas detectadas";
+                break;
+            }
         }
-    }
 
-    if (encontrou) {
-        resultado.innerHTML = "🚨 Possível Fake News detectada!";
-        resultado.className = "alerta-fake";
-    } else {
-        // Se não encontrou palavras-chave suspeitas, verifica com API externa
-        const fakeNewsConfirmada = await verificarComAPIExterna(texto);
-        if (fakeNewsConfirmada) {
-            resultado.innerHTML = "🚨 Possível Fake News detectada!";
+        if (suspeitoEncontrado) {
+            resultado.innerHTML = `⚠️ **Conteúdo suspeito encontrado!** (${fonteSuspeita})`;
             resultado.className = "alerta-fake";
         } else {
-            resultado.innerHTML = "✅ Não encontramos sinais claros de fake news.";
+            resultado.innerHTML = "🔍 **Análise inicial não encontrou padrões suspeitos.** Lembre-se de sempre verificar em fontes confiáveis.";
             resultado.className = "alerta-verdade";
         }
-    }
-}
 
-// Função que integra uma API externa para verificar a veracidade da notícia
-async function verificarComAPIExterna(texto) {
-    try {
-        const response = await fetch(`https://api.exemplo.com/verificar?texto=${encodeURIComponent(texto)}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer SUA_CHAVE_API'
-            }
-        });
-        
-        const data = await response.json();
-        
-        if (data.status === "fake") {
-            return true;
-        } else {
-            return false;
-        }
+        // Em um projeto real, aqui você faria uma requisição para o back-end
+        // para realizar buscas mais aprofundadas em APIs de busca e agências de checagem.
+
     } catch (error) {
-        console.error('Erro na verificação com API externa:', error);
-        return false;
+        console.error('Erro na análise:', error);
+        resultado.innerHTML = "❌ Erro ao realizar a análise.";
+        resultado.className = "alerta-fake";
     }
 }
