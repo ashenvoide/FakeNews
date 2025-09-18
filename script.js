@@ -4,7 +4,7 @@ async function verificarNoticia() {
 
     // Palavras-chave padrão
     const palavrasSuspeitas = [
-       {
+       
     "cura milagrosa", "remédio secreto", "vacina perigosa", "vacina mata", "vacina causa autismo",
     "chip 5g", "chip na vacina", "terra plana", "fim do mundo", "governo esconde",
     "cientistas escondem", "mídia comprada", "controle da mente", "nova doença inventada",
@@ -18,7 +18,7 @@ async function verificarNoticia() {
     "ganhe prêmio fácil", "não querem que você saiba", "segredo do governo",
     "fim da humanidade", "alienígenas controlam", "cura com ervas secretas",
     "experimento proibido", "internet esconde", "cura natural proibida",
-    "cientistas foram silenciados", "descoberta oculta", "mídia mente"
+    "cientistas foram silenciados", "descoberta oculta", "mídia mente",
     "cura", "cura milagrosa", "remédio secreto", "remédio caseiro",
     "cura garantida","cura imediata","cura em 24 horas","cura em 7 dias",
     "tratamento secreto","tratamento caseiro","cura natural",
@@ -102,7 +102,7 @@ const extras = [
   "cura milagrosa comprovada", "cura caseira incrível", "remédio natural milagroso",
   "cura rápida", "cura instantânea", "cura em 3 dias", "cura em 5 dias",
   "cura em 10 dias", "remédio secreto da família", "segredo revelado pelo médico"
-}
+
 
     ];
 
